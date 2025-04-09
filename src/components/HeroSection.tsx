@@ -1,13 +1,12 @@
 
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ThreeBackground from './ThreeBackground';
 
 const HeroSection = () => {
   return (
     <section id="home" className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-16">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      </div>
+      <ThreeBackground />
       
       <div className="section-container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">

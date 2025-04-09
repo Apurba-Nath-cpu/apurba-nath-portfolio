@@ -40,6 +40,7 @@ const skillCategories = [
 
 const SkillsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,10 +56,40 @@ const SkillsSection = () => {
       observer.observe(sectionRef.current);
     }
 
+    // Add card hover effect
+    cardsRef.current.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        card.style.transition = 'transform 0.1s';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        if (!card) return;
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        card.style.transition = 'transform 0.5s';
+      });
+    });
+
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
+      
+      cardsRef.current.forEach(card => {
+        card.removeEventListener('mousemove', () => {});
+        card.removeEventListener('mouseleave', () => {});
+      });
     };
   }, []);
 
@@ -77,8 +108,16 @@ const SkillsSection = () => {
           {skillCategories.map((category, idx) => (
             <div 
               key={idx} 
-              className="bg-card shadow-sm rounded-lg p-6 border animate-fade-in"
-              style={{ animationDelay: `${idx * 0.1}s` }}
+              className="bg-card shadow-sm rounded-lg p-6 border animate-fade-in skill-card"
+              style={{ 
+                animationDelay: `${idx * 0.1}s`,
+                transformStyle: 'preserve-3d'
+              }}
+              ref={el => {
+                if (el && !cardsRef.current.includes(el)) {
+                  cardsRef.current[idx] = el;
+                }
+              }}
             >
               <div className="flex items-center mb-4">
                 <div className="p-2 bg-primary/10 rounded-md text-primary mr-3">
