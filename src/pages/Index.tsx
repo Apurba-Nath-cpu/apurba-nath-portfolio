@@ -10,6 +10,7 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import CustomCursor from '@/components/CustomCursor';
+import ThreeBackground from '@/components/ThreeBackground';
 import { animateOnScroll } from '@/utils/animateOnScroll';
 
 const Index = () => {
@@ -25,6 +26,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <CustomCursor />
+      <ThreeBackground />
       <Navbar />
       <HeroSection />
       <AboutSection />

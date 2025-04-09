@@ -49,10 +49,12 @@ const ThreeBackground = () => {
       y: 0
     };
 
-    window.addEventListener('mousemove', (event) => {
+    const handleMouseMove = (event: MouseEvent) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
 
     // Handle window resize
     const handleResize = () => {
@@ -82,7 +84,7 @@ const ThreeBackground = () => {
     // Clean up
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleWindowMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove);
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
