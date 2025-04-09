@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { 
   Code2, Database, Globe, Layout, Palette, Terminal, 
-  Figma, BookOpen, Tool, Layers, GitBranch
+  Figma, BookOpen, Wrench, Layers, GitBranch
 } from 'lucide-react';
 
 const skillCategories = [
@@ -23,7 +23,7 @@ const skillCategories = [
   },
   {
     title: "Developer Tools",
-    icon: <Tool className="h-6 w-6" />,
+    icon: <Wrench className="h-6 w-6" />,
     skills: ["Android Studio", "Git", "GitHub", "Flutter DevTools", "Vercel", "Jupyter Notebook", "Figma"]
   },
   {
