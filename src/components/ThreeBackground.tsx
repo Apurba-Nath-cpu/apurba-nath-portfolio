@@ -25,7 +25,7 @@ const ThreeBackground = () => {
 
     // Create particles with reduced count for better performance
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 800; // Reduced from 1000
+    const particlesCount = 800; // Reduced count for better performance
     
     const positionArray = new Float32Array(particlesCount * 3);
     for (let i = 0; i < particlesCount * 3; i++) {

@@ -1,3 +1,15 @@
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://apurba-nath.com/sitemap.xml
+
+# Page-specific directives
+Disallow: /admin/
+Disallow: /private/
+
+# Specific bot rules
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +22,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: Googlebot-Image
 Allow: /

@@ -42,7 +42,7 @@ const CustomCursor = () => {
     cursor.appendChild(renderer.domElement);
     
     // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
     
     // Add directional light
@@ -50,28 +50,39 @@ const CustomCursor = () => {
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
     
-    // Create Sun - use low poly for pixelated look
-    const sunGeometry = new THREE.BoxGeometry(1.2, 1.2, 1.2, 2, 2, 2);
+    // Create Sun with improved appearance - use more distinct pixel look
+    const sunGeometry = new THREE.BoxGeometry(1.4, 1.4, 1.4, 1, 1, 1);
     const sunMaterial = new THREE.MeshBasicMaterial({
-      color: 0xF97316, // Orange color
+      color: 0xFFA500, // More vibrant orange color
       flatShading: true, // Enable flat shading for pixelated look
     });
     
+    // Add sun glow
+    const sunGlowGeometry = new THREE.BoxGeometry(1.6, 1.6, 1.6, 1, 1, 1);
+    const sunGlowMaterial = new THREE.MeshBasicMaterial({
+      color: 0xFFD700, // Gold color for glow
+      transparent: true,
+      opacity: 0.3,
+      flatShading: true,
+    });
+    
     const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+    const sunGlow = new THREE.Mesh(sunGlowGeometry, sunGlowMaterial);
     scene.add(sun);
+    scene.add(sunGlow);
     sunRef.current = sun;
     
-    // Create Earth - use low poly for pixelated look
-    const earthGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.4, 1, 1, 1);
+    // Create Earth with improved appearance
+    const earthGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5, 1, 1, 1);
     const earthMaterial = new THREE.MeshLambertMaterial({
-      color: 0x33C3F0, // Blue color
+      color: 0x3399FF, // More vibrant blue color
       flatShading: true, // Enable flat shading for pixelated look
     });
     
     const earth = new THREE.Mesh(earthGeometry, earthMaterial);
     scene.add(earth);
     earthRef.current = earth;
-    earth.position.set(1.8, 0, 0); // Position Earth away from Sun
+    earth.position.set(2.0, 0, 0); // Position Earth away from Sun
     
     // Position camera
     camera.position.z = 3;
@@ -88,6 +99,8 @@ const CustomCursor = () => {
       if (sunRef.current) {
         sunRef.current.rotation.y += 0.5 * delta;
         sunRef.current.rotation.x += 0.2 * delta;
+        sunGlow.rotation.y = sunRef.current.rotation.y;
+        sunGlow.rotation.x = sunRef.current.rotation.x;
       }
       
       if (earthRef.current) {
@@ -95,7 +108,7 @@ const CustomCursor = () => {
         const orbitSpeed = isPointer ? 2.8 * delta : 1.4 * delta;
         earthOrbitRef.current += orbitSpeed;
         
-        const orbitRadius = isClicking ? 1.5 : 1.8;
+        const orbitRadius = isClicking ? 1.5 : 2.0;
         earthRef.current.position.x = Math.cos(earthOrbitRef.current) * orbitRadius;
         earthRef.current.position.z = Math.sin(earthOrbitRef.current) * orbitRadius;
         earthRef.current.rotation.y += 1.2 * delta;
@@ -118,6 +131,8 @@ const CustomCursor = () => {
       // Dispose of geometries and materials
       sunGeometry.dispose();
       sunMaterial.dispose();
+      sunGlowGeometry.dispose();
+      sunGlowMaterial.dispose();
       earthGeometry.dispose();
       earthMaterial.dispose();
       
@@ -143,8 +158,8 @@ const CustomCursor = () => {
     
     const moveCursor = () => {
       // Smooth interpolation for cursor movement (reduces lag)
-      lastX += (targetX - lastX) * 0.25; // Increased smoothing factor for better performance
-      lastY += (targetY - lastY) * 0.25;
+      lastX += (targetX - lastX) * 0.3; // Improved smoothing factor
+      lastY += (targetY - lastY) * 0.3;
       
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${lastX}px, ${lastY}px, 0)`;
