@@ -8,9 +8,10 @@ const CustomCursor = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
+  const sunRef = useRef<THREE.Mesh | null>(null);
   const earthRef = useRef<THREE.Mesh | null>(null);
-  const moonRef = useRef<THREE.Mesh | null>(null);
-  const moonOrbitRef = useRef<number>(0);
+  const earthOrbitRef = useRef<number>(0);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   
   useEffect(() => {
     if (typeof window === 'undefined' || 
@@ -22,14 +23,21 @@ const CustomCursor = () => {
     const cursor = cursorRef.current;
     if (!cursor) return;
     
+    // Performance optimization: Create scene only once
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    
+    // Use lower resolution for better performance
     const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
-      alpha: true 
+      antialias: false, // Disable antialiasing for pixelated look
+      alpha: true,
+      precision: "lowp", // Use lower precision for better performance
     });
     
+    rendererRef.current = renderer;
+    
     renderer.setSize(60, 60);
+    renderer.setPixelRatio(1); // Force low pixel ratio for pixelated look
     renderer.setClearColor(0x000000, 0);
     cursor.appendChild(renderer.domElement);
     
@@ -42,56 +50,64 @@ const CustomCursor = () => {
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
     
-    // Create Earth
-    const earthGeometry = new THREE.SphereGeometry(0.8, 32, 32);
-    const earthMaterial = new THREE.MeshPhongMaterial({
-      map: new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg'),
-      bumpMap: new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_normal_2048.jpg'),
-      bumpScale: 0.05,
-      specularMap: new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_specular_2048.jpg'),
-      specular: new THREE.Color(0x333333)
+    // Create Sun - use low poly for pixelated look
+    const sunGeometry = new THREE.BoxGeometry(1.2, 1.2, 1.2, 2, 2, 2);
+    const sunMaterial = new THREE.MeshBasicMaterial({
+      color: 0xF97316, // Orange color
+      flatShading: true, // Enable flat shading for pixelated look
+    });
+    
+    const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+    scene.add(sun);
+    sunRef.current = sun;
+    
+    // Create Earth - use low poly for pixelated look
+    const earthGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.4, 1, 1, 1);
+    const earthMaterial = new THREE.MeshLambertMaterial({
+      color: 0x33C3F0, // Blue color
+      flatShading: true, // Enable flat shading for pixelated look
     });
     
     const earth = new THREE.Mesh(earthGeometry, earthMaterial);
     scene.add(earth);
     earthRef.current = earth;
-    
-    // Create Moon
-    const moonGeometry = new THREE.SphereGeometry(0.2, 16, 16);
-    const moonMaterial = new THREE.MeshPhongMaterial({
-      map: new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/moon_1024.jpg')
-    });
-    
-    const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-    scene.add(moon);
-    moonRef.current = moon;
-    moon.position.set(1.5, 0, 0);
+    earth.position.set(1.8, 0, 0); // Position Earth away from Sun
     
     // Position camera
     camera.position.z = 3;
     
     // Animation
-    const animate = () => {
+    let lastTime = 0;
+    const animate = (timestamp: number) => {
       requestAnimationFrame(animate);
       
+      // Calculate delta time for smooth animation regardless of frame rate
+      const delta = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+      
+      if (sunRef.current) {
+        sunRef.current.rotation.y += 0.5 * delta;
+        sunRef.current.rotation.x += 0.2 * delta;
+      }
+      
       if (earthRef.current) {
-        earthRef.current.rotation.y += isPointer ? 0.02 : 0.005;
-      }
-      
-      if (moonRef.current) {
-        // Update moon orbit
-        moonOrbitRef.current += isPointer ? 0.03 : 0.01;
-        const orbitRadius = isClicking ? 1.3 : 1.5;
+        // Update earth orbit - 1.4x faster as requested
+        const orbitSpeed = isPointer ? 2.8 * delta : 1.4 * delta;
+        earthOrbitRef.current += orbitSpeed;
         
-        moonRef.current.position.x = Math.cos(moonOrbitRef.current) * orbitRadius;
-        moonRef.current.position.z = Math.sin(moonOrbitRef.current) * orbitRadius;
-        moonRef.current.rotation.y += 0.01;
+        const orbitRadius = isClicking ? 1.5 : 1.8;
+        earthRef.current.position.x = Math.cos(earthOrbitRef.current) * orbitRadius;
+        earthRef.current.position.z = Math.sin(earthOrbitRef.current) * orbitRadius;
+        earthRef.current.rotation.y += 1.2 * delta;
       }
       
-      renderer.render(scene, camera);
+      // Only render if the cursor is visible for performance
+      if (!isHidden && rendererRef.current) {
+        renderer.render(scene, camera);
+      }
     };
     
-    animate();
+    animate(0);
     
     // Clean up function
     return () => {
@@ -99,10 +115,18 @@ const CustomCursor = () => {
         cursor.removeChild(renderer.domElement);
       }
       
-      scene.clear();
+      // Dispose of geometries and materials
+      sunGeometry.dispose();
+      sunMaterial.dispose();
+      earthGeometry.dispose();
+      earthMaterial.dispose();
+      
       renderer.dispose();
+      rendererRef.current = null;
+      sunRef.current = null;
+      earthRef.current = null;
     };
-  }, []);
+  }, [isHidden]);
   
   // Cursor position tracking (optimized for performance)
   useEffect(() => {
@@ -119,8 +143,8 @@ const CustomCursor = () => {
     
     const moveCursor = () => {
       // Smooth interpolation for cursor movement (reduces lag)
-      lastX += (targetX - lastX) * 0.2;
-      lastY += (targetY - lastY) * 0.2;
+      lastX += (targetX - lastX) * 0.25; // Increased smoothing factor for better performance
+      lastY += (targetY - lastY) * 0.25;
       
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${lastX}px, ${lastY}px, 0)`;
@@ -129,6 +153,7 @@ const CustomCursor = () => {
       rafId = requestAnimationFrame(moveCursor);
     };
     
+    // Use passive event listeners for better performance
     const handleMouseMove = (e: MouseEvent) => {
       // Update target position directly from mouse event
       targetX = e.clientX - 30; // Offset by half width
@@ -148,12 +173,12 @@ const CustomCursor = () => {
     const handleMouseLeave = () => setIsHidden(true);
     const handleMouseEnter = () => setIsHidden(false);
     
-    // Add event listeners
+    // Add event listeners with passive option for performance
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
+    document.addEventListener('mousedown', handleMouseDown, { passive: true });
+    document.addEventListener('mouseup', handleMouseUp, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    document.addEventListener('mouseenter', handleMouseEnter, { passive: true });
     
     // Start animation loop
     rafId = requestAnimationFrame(moveCursor);
