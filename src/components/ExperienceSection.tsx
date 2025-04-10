@@ -12,10 +12,10 @@ import {
 const experiences = [
   {
     title: "Software Developer Engineer (Frontend)",
-    company: "Sayurbox",
-    location: "Jakarta, Pinang, Tangerang, Banten, Indonesia (Remote)",
+    company: "Superbolt Technologies",
+    location: "Indiranagar, Bengaluru, Karnataka",
     period: "28 Dec 2023 - Present",
-    skills: ["React", "Flutter", "Firebase", "Figma", "Jira"],
+    skills: ["React", "Flutter", "Firebase", "Figma", "Unity"],
     achievements: [
       "Elevated App Rating from 3.0 to 4.3, Revamped user experience and resolved key pain points, skyrocketing app ratings from 3.0 to 4.3 on Google Play Store, ahead of year's median.",
       "Boosted website's performance by 45%, Leveraged CDN implementation and optimized code modularity through OOP, resulting in a 45% decrease in render.",

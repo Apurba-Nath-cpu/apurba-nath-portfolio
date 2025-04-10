@@ -1,5 +1,5 @@
-
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -8,6 +8,12 @@ import { useToast } from '@/components/ui/use-toast';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 
 const ContactSection = () => {
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  const toName = import.meta.env.VITE_TO_NAME;
+  const phone = import.meta.env.VITE_PHONE_NUMBER;
+
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -21,23 +27,46 @@ const ContactSection = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const templateParams = {
+      from_name: formData.name,
+      to_name: toName,
+      email: formData.email,
+      message: formData.message,
+    };
+
+    console.log(formData.email);
+    console.log(formData.name);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
-      setIsSubmitting(false);
-    }, 1000);
+    await emailjs
+    .send(serviceId, templateId, templateParams, {
+      publicKey: publicKey,
+    })
+    .then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      },
+      (err) => {
+        console.log('FAILED...', err);
+        toast({
+          title: "Something went wrong!",
+          description: err,
+        });
+      },
+    );
+    setIsSubmitting(false);
   };
 
   return (
@@ -59,8 +88,8 @@ const ContactSection = () => {
                 <Mail className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-lg font-medium mb-2">Email</h3>
-              <a href="mailto:apurba44889@gmail.com" className="text-accent hover:underline">
-                apurba44889@gmail.com
+              <a href="mailto:apurba64880@gmail.com" className="text-accent hover:underline">
+                apurba64880@gmail.com
               </a>
             </CardContent>
           </Card>
@@ -71,8 +100,8 @@ const ContactSection = () => {
                 <Phone className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-lg font-medium mb-2">Phone</h3>
-              <a href="tel:+918697658384" className="text-accent hover:underline">
-                +91 8697658384
+              <a href={`tel:+91${phone}`} className="text-accent hover:underline">
+                +91 {phone}
               </a>
             </CardContent>
           </Card>
@@ -84,7 +113,7 @@ const ContactSection = () => {
               </div>
               <h3 className="text-lg font-medium mb-2">Location</h3>
               <p className="text-muted-foreground">
-                Kalyani, West Bengal, India
+                Indiranagar, Bengaluru, Karnataka
               </p>
             </CardContent>
           </Card>

@@ -23,7 +23,7 @@ const HeroSection = () => {
             
             <p className="text-lg text-muted-foreground max-w-2xl">
               I'm a software engineer specializing in building exceptional digital experiences.
-              Currently, I'm focused on building accessible, human-centered products at <span className="font-medium text-foreground">Sayurbox</span>.
+              Currently, I'm focused on building accessible, 3D home designing product at <span className="font-medium text-foreground">Superbolt Technologies</span>.
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -31,7 +31,7 @@ const HeroSection = () => {
                 <a href="#contact">Get In Touch</a>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                <a href="https://tinyurl.com/apurba-sde-resume" target="_blank" rel="noopener noreferrer">
                   View Resume
                 </a>
               </Button>
@@ -39,7 +39,7 @@ const HeroSection = () => {
             
             <div className="flex items-center space-x-5 pt-2">
               <a 
-                href="https://github.com/apurba-nath" 
+                href="https://github.com/apurba-nath-cpu" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -57,7 +57,7 @@ const HeroSection = () => {
                 <Linkedin size={22} />
               </a>
               <a 
-                href="mailto:apurba44889@gmail.com" 
+                href="mailto:apurba64880@gmail.com" 
                 aria-label="Email"
                 className="text-gray-500 hover:text-accent transition-colors"
               >
@@ -67,14 +67,16 @@ const HeroSection = () => {
           </div>
           
           <div className="flex-1 flex justify-center max-w-md animate-fade-in-left">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent/20">
-              <img 
-                src="/lovable-uploads/1eb4d20d-3fb7-4334-93cb-07c84f9b2433.png" 
-                alt="Apurba Nath" 
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-          </div>
+  <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent/20 transition-all duration-700 [transform-style:preserve-3d] hover:[transform:rotateY(180deg)] group">
+    <img 
+      src="/images/my_ghibli_at_searshore.jpeg" 
+      alt="Apurba Nath" 
+      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+    />
+  </div>
+</div>
+
+
         </div>
         
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">

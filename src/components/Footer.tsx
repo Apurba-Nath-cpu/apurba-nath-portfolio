@@ -12,14 +12,14 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <h2 className="text-2xl font-bold font-heading gradient-text mb-2">Apurba Nath</h2>
             <p className="text-gray-400 max-w-md">
-              Building exceptional digital experiences with modern web technologies.
+              Building exceptional digital experiences with modern mobile and web technologies.
             </p>
           </div>
           
           <div className="flex flex-wrap gap-6 justify-center">
             <Button asChild variant="ghost" size="icon" className="text-gray-400 hover:text-white">
               <a 
-                href="https://github.com/apurba-nath" 
+                href="https://github.com/apurba-nath-cpu" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -39,7 +39,7 @@ const Footer = () => {
             </Button>
             <Button asChild variant="ghost" size="icon" className="text-gray-400 hover:text-white">
               <a 
-                href="mailto:apurba44889@gmail.com"
+                href="mailto:apurba64880@gmail.com"
                 aria-label="Email"
               >
                 <Mail className="h-5 w-5" />

@@ -14,7 +14,7 @@ const navItems = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +29,13 @@ const Navbar = () => {
       document.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled]);
+
+    // Add this near your other useEffect:
+  useEffect(() => {
+    // Apply dark mode on component mount
+    document.documentElement.classList.toggle('dark', darkMode);
+  }, []); // Empty dependency array means this runs once on mount
+
 
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
@@ -62,7 +69,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center space-x-4">
             <a 
-              href="https://github.com/apurba-nath" 
+              href="https://github.com/apurba-nath-cpu" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -80,21 +87,19 @@ const Navbar = () => {
               <Linkedin size={20} />
             </a>
             <a 
-              href="mailto:apurba44889@gmail.com" 
+              href="mailto:apurba64880@gmail.com" 
               aria-label="Email"
               className="text-gray-500 hover:text-accent transition-colors"
             >
               <Mail size={20} />
             </a>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <div 
               onClick={toggleDarkMode}
               className="text-gray-500 hover:text-accent"
               aria-label="Toggle dark mode"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </Button>
+            </div>
           </div>
           
           <div className="md:hidden flex items-center">
@@ -130,7 +135,7 @@ const Navbar = () => {
                   </div>
                   <div className="mt-auto py-6 flex space-x-6">
                     <a 
-                      href="https://github.com/apurba-nath" 
+                      href="https://github.com/apurba-nath-cpu" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       aria-label="GitHub"
@@ -148,7 +153,7 @@ const Navbar = () => {
                       <Linkedin size={20} />
                     </a>
                     <a 
-                      href="mailto:apurba44889@gmail.com" 
+                      href="mailto:apurba64880@gmail.com" 
                       aria-label="Email"
                       className="text-gray-500 hover:text-accent transition-colors"
                     >
