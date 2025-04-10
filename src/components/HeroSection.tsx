@@ -68,7 +68,7 @@ const HeroSection = () => {
           <div className="flex-1 flex justify-center max-w-md animate-fade-in-left [perspective:1000px]">
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent/20 transition-all duration-700 [transform-style:preserve-3d] group hover:[transform:rotateY(180deg)]">
               <img
-                src="/images/my_ghibli_at_searshore.jpeg"
+                src="/images/my_ghibli_pic_at_searshore.png"
                 alt="Apurba Nath"
                 className="w-full h-full object-cover object-top transition-transform duration-700 [backface-visibility:hidden]"
               />
