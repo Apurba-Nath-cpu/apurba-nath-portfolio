@@ -68,34 +68,35 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="https://github.com/apurba-nath-cpu" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="text-gray-500 hover:text-accent transition-colors"
-            >
-              <Github size={20} />
-            </a>
+          <a 
+  href="https://github.com/apurba-nath-cpu" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  aria-label="GitHub"
+  className="text-gray-500 hover:text-accent transform-gpu origin-center hover:rotate-45 transition-all duration-700"
+>
+  <Github size={20} />
+</a>
+
             <a 
               href="https://www.linkedin.com/in/apurba-nath-613936200/" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="text-gray-500 hover:text-accent transition-colors"
+              className="text-gray-500 hover:text-accent transform-gpu origin-center hover:rotate-45 transition-all duration-700"
             >
               <Linkedin size={20} />
             </a>
             <a 
               href="mailto:apurba64880@gmail.com" 
               aria-label="Email"
-              className="text-gray-500 hover:text-accent transition-colors"
+              className="text-gray-500 hover:text-accent transform-gpu origin-center hover:rotate-45 transition-all duration-700"
             >
               <Mail size={20} />
             </a>
             <div 
               onClick={toggleDarkMode}
-              className="text-gray-500 hover:text-accent"
+              className="text-gray-500 hover:text-accent transform-gpu origin-center hover:rotate-45 transition-all duration-700"
               aria-label="Toggle dark mode"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}

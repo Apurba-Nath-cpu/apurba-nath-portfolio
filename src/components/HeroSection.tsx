@@ -43,7 +43,7 @@ const HeroSection = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="text-gray-500 hover:text-accent transition-colors"
+                className="text-gray-500 hover:text-accent transform-gpu origin-center hover:rotate-45 transition-all duration-700"
               >
                 <Github size={22} />
               </a>
@@ -52,33 +52,30 @@ const HeroSection = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="text-gray-500 hover:text-accent transition-colors"
+                className="text-gray-500 hover:text-accent transform-gpu origin-center hover:rotate-45 transition-all duration-700"
               >
                 <Linkedin size={22} />
               </a>
               <a 
                 href="mailto:apurba64880@gmail.com" 
                 aria-label="Email"
-                className="text-gray-500 hover:text-accent transition-colors"
+                className="text-gray-500 hover:text-accent transform-gpu origin-center hover:rotate-45 transition-all duration-700"
               >
                 <Mail size={22} />
               </a>
             </div>
           </div>
-          
-          <div className="flex-1 flex justify-center max-w-md animate-fade-in-left">
-  <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent/20 transition-all duration-700 [transform-style:preserve-3d] hover:[transform:rotateY(180deg)] group">
-    <img 
-      src="/images/my_ghibli_at_searshore.jpeg" 
-      alt="Apurba Nath" 
-      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+          <div className="flex-1 flex justify-center max-w-md animate-fade-in-left [perspective:1000px]">
+  <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent/20 transition-all duration-700 [transform-style:preserve-3d] group hover:[transform:rotateY(180deg)]">
+    <img
+      src="/images/my_ghibli_at_searshore.jpeg"
+      alt="Apurba Nath"
+      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110 [backface-visibility:hidden]"
     />
   </div>
 </div>
 
-
         </div>
-        
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
           <a href="#about" className="text-muted-foreground hover:text-accent transition-colors">
             <ArrowDown size={24} />
