@@ -6,13 +6,13 @@ import {
   Briefcase, 
   Calendar, 
   MapPin, 
-  ExternalLink
+  Hexagon,
 } from 'lucide-react';
 
 const experiences = [
   {
     title: "Software Developer Engineer (Frontend)",
-    company: "Superbolt Technologies",
+    company: "Superbolt Technologies Pvt. Ltd.",
     location: "Indiranagar, Bengaluru, Karnataka",
     period: "28 Dec 2023 - Present",
     skills: ["React", "Flutter", "Firebase", "Figma", "Unity"],
@@ -27,7 +27,7 @@ const experiences = [
   },
   {
     title: "Flutter Intern",
-    company: "Rivos",
+    company: "Ricoz",
     location: "Remote",
     period: "Sept 2023 - Nov 2023",
     skills: ["Flutter", "Firebase"],
@@ -121,7 +121,7 @@ const ExperienceSection = () => {
                   <ul className="space-y-2 text-muted-foreground">
                     {exp.achievements.map((achievement, i) => (
                       <li key={i} className="flex items-start">
-                        <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0 mt-1" />
+                        <Hexagon fill='rgb(50,50,50,0.5)' className="w-4 h-4 mr-4 flex-shrink-0 mt-1" />
                         <span>{achievement}</span>
                       </li>
                     ))}
