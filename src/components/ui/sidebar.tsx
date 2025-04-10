@@ -552,7 +552,14 @@ const SidebarMenuButton = React.forwardRef<
     ref
   ) => {
     const Comp = asChild ? Slot : "button"
-    const { isMobile, state } = useSidebar()
+    const { isMobile, state, setOpenMobile } = useSidebar() // Get setOpenMobile from context
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (isMobile) {
+        setOpenMobile(false) // Close the drawer on item click
+      }
+      props.onClick?.(event) // Call the original onClick handler
+    }
 
     const button = (
       <Comp
@@ -561,6 +568,7 @@ const SidebarMenuButton = React.forwardRef<
         data-size={size}
         data-active={isActive}
         className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+        onClick={handleClick} // Use the new handleClick function
         {...props}
       />
     )
@@ -588,6 +596,7 @@ const SidebarMenuButton = React.forwardRef<
     )
   }
 )
+
 SidebarMenuButton.displayName = "SidebarMenuButton"
 
 const SidebarMenuAction = React.forwardRef<
