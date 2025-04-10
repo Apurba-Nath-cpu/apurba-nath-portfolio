@@ -7,24 +7,24 @@ import { Github, ExternalLink } from 'lucide-react';
 
 const projects = [
   {
-    title: "Bastua",
+    title: "Batua",
     description: "A Flutter and Dart based application that allows users to effortlessly create or import wallets across networks and transition between wallet and webviews for seamless navigation.",
     tags: ["Dart", "Flutter", "Node.js", "MongoDB", "Alchemy"],
-    github: "https://github.com/apurba-nath-cpu",
+    github: "https://github.com/apurba-nath-cpu/batua",
     demo: null
   },
   {
-    title: "Navigatex",
+    title: "navigatiox",
     description: "A Dart package that provides a collection of custom page transition animations to enhance the navigation experience in your Flutter applications with 7+ animations with intense customization.",
     tags: ["Flutter", "Dart", "Animation"],
-    github: "https://github.com/apurba-nath-cpu",
+    github: "https://github.com/apurba-nath-cpu/navigatiox",
     demo: "https://pub.dev"
   },
   {
-    title: "Readfine",
+    title: "Readme",
     description: "An application to share poems, stories, articles, essays, etc. under 5 different categories, a social media app for literature with Firebase for authentication, storage, connect, post in the platform.",
     tags: ["Dart", "Flutter", "Firebase"],
-    github: "https://github.com/apurba-nath-cpu",
+    github: "https://github.com/apurba-nath-cpu/Readme",
     demo: null
   }
 ];
