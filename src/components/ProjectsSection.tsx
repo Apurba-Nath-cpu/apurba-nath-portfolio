@@ -1,10 +1,9 @@
+
 import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Github, ExternalLink } from 'lucide-react';
-import FloatingCard from './three/FloatingCard';
-import FloatingSphere from './three/FloatingSphere';
 
 const projects = [
   {
@@ -55,13 +54,8 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-20 bg-secondary/50 dark:bg-gray-900 relative overflow-hidden" ref={sectionRef}>
-      <div className="absolute inset-0">
-        <FloatingCard position={[-7, 2, 0]} rotation={[0.3, -0.2, 0]} color="#8B5CF6" />
-        <FloatingSphere position={[7, -2, 0]} color="#D946EF" size={1} />
-      </div>
-      
-      <div className="section-container reveal fade-bottom relative z-10">
+    <section id="projects" className="py-20 bg-secondary/50 dark:bg-gray-900" ref={sectionRef}>
+      <div className="section-container reveal fade-bottom">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">Notable Projects</h2>
           <div className="w-20 h-1 bg-accent mx-auto"></div>

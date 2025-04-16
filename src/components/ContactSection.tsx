@@ -6,7 +6,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
-import FloatingCard from './three/FloatingCard';
 
 const ContactSection = () => {
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -71,13 +70,8 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-secondary/50 dark:bg-gray-900 relative overflow-hidden">
-      <div className="absolute inset-0">
-        <FloatingCard position={[-6, 2, 0]} rotation={[0.1, 0.3, 0]} color="#1EAEDB" />
-        <FloatingCard position={[6, -2, 0]} rotation={[-0.1, -0.3, 0]} color="#33C3F0" />
-      </div>
-      
-      <div className="section-container relative z-10">
+    <section id="contact" className="py-20 bg-secondary/50 dark:bg-gray-900">
+      <div className="section-container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">Get In Touch</h2>
           <div className="w-20 h-1 bg-accent mx-auto"></div>
