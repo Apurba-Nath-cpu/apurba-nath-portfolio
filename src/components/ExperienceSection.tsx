@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +7,7 @@ import {
   MapPin, 
   Hexagon,
 } from 'lucide-react';
+import FloatingCard from './three/FloatingCard';
 
 const experiences = [
   {
@@ -74,7 +74,10 @@ const ExperienceSection = () => {
   }, []);
 
   return (
-    <section id="experience" className="py-20" ref={sectionRef}>
+    <section id="experience" className="py-20 relative overflow-hidden" ref={sectionRef}>
+      <FloatingCard position={[-6, 3, 0]} rotation={[0.2, 0.5, 0]} color="#9b87f5" />
+      <FloatingCard position={[6, -3, 0]} rotation={[-0.2, -0.5, 0]} color="#7E69AB" />
+      
       <div className="section-container reveal fade-bottom">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">Work Experience</h2>

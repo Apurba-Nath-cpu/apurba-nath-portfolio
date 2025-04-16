@@ -1,9 +1,7 @@
-
 import { useEffect, useRef } from 'react';
-import { 
-  Code2, Database, Globe, Layout, Palette, Terminal, 
-  Figma, BookOpen, Wrench, Layers, GitBranch
-} from 'lucide-react';
+import { Code2, Database, Globe, Layout, Palette, Terminal, 
+  Figma, BookOpen, Wrench, Layers, GitBranch } from 'lucide-react';
+import FloatingSphere from './three/FloatingSphere';
 
 const skillCategories = [
   {
@@ -94,7 +92,10 @@ const SkillsSection = () => {
   }, []);
 
   return (
-    <section id="skills" className="py-20" ref={sectionRef}>
+    <section id="skills" className="py-20 relative overflow-hidden" ref={sectionRef}>
+      <FloatingSphere position={[-5, 3, 0]} color="#F97316" size={0.9} />
+      <FloatingSphere position={[5, -3, 0]} color="#0EA5E9" size={1.1} />
+      
       <div className="section-container reveal fade-bottom">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">Technical Skills</h2>
