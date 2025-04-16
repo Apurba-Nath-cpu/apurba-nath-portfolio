@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -56,8 +57,10 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="py-20 bg-secondary/50 dark:bg-gray-900 relative overflow-hidden" ref={sectionRef}>
-      <FloatingCard position={[-7, 2, 0]} rotation={[0.3, -0.2, 0]} color="#8B5CF6" />
-      <FloatingSphere position={[7, -2, 0]} color="#D946EF" size={1} />
+      <div className="absolute inset-0 w-full h-full">
+        <FloatingCard position={[-7, 2, 0]} rotation={[0.3, -0.2, 0]} color="#8B5CF6" />
+        <FloatingSphere position={[7, -2, 0]} color="#D946EF" size={1} />
+      </div>
       
       <div className="section-container reveal fade-bottom">
         <div className="text-center mb-12">

@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { Code2, Database, Globe, Layout, Palette, Terminal, 
   Figma, BookOpen, Wrench, Layers, GitBranch } from 'lucide-react';
@@ -93,8 +94,10 @@ const SkillsSection = () => {
 
   return (
     <section id="skills" className="py-20 relative overflow-hidden" ref={sectionRef}>
-      <FloatingSphere position={[-5, 3, 0]} color="#F97316" size={0.9} />
-      <FloatingSphere position={[5, -3, 0]} color="#0EA5E9" size={1.1} />
+      <div className="absolute inset-0 w-full h-full">
+        <FloatingSphere position={[-5, 3, 0]} color="#F97316" size={0.9} />
+        <FloatingSphere position={[5, -3, 0]} color="#0EA5E9" size={1.1} />
+      </div>
       
       <div className="section-container reveal fade-bottom">
         <div className="text-center mb-12">

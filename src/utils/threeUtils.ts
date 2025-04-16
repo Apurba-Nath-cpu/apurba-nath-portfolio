@@ -6,6 +6,7 @@ interface ThreeSetupConfig {
   antialias?: boolean;
   alpha?: boolean;
   precision?: "highp" | "mediump" | "lowp";
+  position?: { top?: string; left?: string; right?: string; bottom?: string; zIndex?: string };
 }
 
 export const createThreeSetup = (mount: HTMLDivElement, config: ThreeSetupConfig = {}) => {
@@ -13,7 +14,8 @@ export const createThreeSetup = (mount: HTMLDivElement, config: ThreeSetupConfig
     size = { width: 150, height: 150 },
     antialias = false,
     alpha = true,
-    precision = "lowp"
+    precision = "lowp",
+    position = { zIndex: "-10" }
   } = config;
 
   const scene = new THREE.Scene();
@@ -22,6 +24,17 @@ export const createThreeSetup = (mount: HTMLDivElement, config: ThreeSetupConfig
 
   renderer.setSize(size.width, size.height);
   mount.appendChild(renderer.domElement);
+  
+  // Apply positioning styles
+  renderer.domElement.style.position = 'absolute';
+  if (position.top) renderer.domElement.style.top = position.top;
+  if (position.left) renderer.domElement.style.left = position.left;
+  if (position.right) renderer.domElement.style.right = position.right;
+  if (position.bottom) renderer.domElement.style.bottom = position.bottom;
+  if (position.zIndex) renderer.domElement.style.zIndex = position.zIndex;
+  
+  // Enable preserving the WebGL drawing buffer to prevent flickering
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
   // Add lights
   const light = new THREE.DirectionalLight(0xffffff, 1);
