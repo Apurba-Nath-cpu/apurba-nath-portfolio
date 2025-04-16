@@ -12,7 +12,7 @@ const HeroSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex-1 space-y-8 animate-fade-in">
             <div className="space-y-2">
-              <p className="text-accent font-medium">Hi, my name is</p>
+              <p className="text-accent font-medium">Hi, I'm</p>
               <h1 className="text-4xl md:text-6xl font-bold font-heading">
                 Apurba Nath
               </h1>
