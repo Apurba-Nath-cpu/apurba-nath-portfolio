@@ -1,6 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { createThreeSetup, cleanupThreeResources } from '@/utils/threeUtils';
 
 interface FloatingCardProps {
   position?: [number, number, number];
@@ -15,16 +16,9 @@ const FloatingCard = ({ position = [0, 0, 0], rotation = [0, 0, 0], color = '#4a
   useEffect(() => {
     if (!mountRef.current) return;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: false,
-      alpha: true,
-      precision: "lowp"
+    const { scene, camera, renderer } = createThreeSetup(mountRef.current, {
+      size: { width: 200, height: 200 }
     });
-
-    renderer.setSize(200, 200);
-    mountRef.current.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry(2, 3, 0.2);
     const material = new THREE.MeshPhongMaterial({
@@ -37,15 +31,6 @@ const FloatingCard = ({ position = [0, 0, 0], rotation = [0, 0, 0], color = '#4a
     card.rotation.set(...rotation);
     scene.add(card);
 
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 1, 2);
-    scene.add(light);
-
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
-    scene.add(ambientLight);
-
-    camera.position.z = 5;
-
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate);
       card.rotation.y += 0.005;
@@ -56,15 +41,7 @@ const FloatingCard = ({ position = [0, 0, 0], rotation = [0, 0, 0], color = '#4a
     animate();
 
     return () => {
-      if (animationIdRef.current) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-      geometry.dispose();
-      material.dispose();
-      renderer.dispose();
-      if (mountRef.current && mountRef.current.contains(renderer.domElement)) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
+      cleanupThreeResources(mountRef.current, renderer, geometry, material, animationIdRef.current);
     };
   }, [color, position, rotation]);
 

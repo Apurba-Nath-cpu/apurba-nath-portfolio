@@ -1,6 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { createThreeSetup, cleanupThreeResources } from '@/utils/threeUtils';
 
 interface FloatingSphereProps {
   position?: [number, number, number];
@@ -15,17 +16,7 @@ const FloatingSphere = ({ position = [0, 0, 0], color = '#9b87f5', size = 1 }: F
   useEffect(() => {
     if (!mountRef.current) return;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: false,
-      alpha: true,
-      precision: "lowp"
-    });
-
-    renderer.setSize(150, 150);
-    mountRef.current.appendChild(renderer.domElement);
-
+    const { scene, camera, renderer } = createThreeSetup(mountRef.current);
     const geometry = new THREE.IcosahedronGeometry(size, 0);
     const material = new THREE.MeshPhongMaterial({
       color: color,
@@ -35,15 +26,6 @@ const FloatingSphere = ({ position = [0, 0, 0], color = '#9b87f5', size = 1 }: F
     const sphere = new THREE.Mesh(geometry, material);
     sphere.position.set(...position);
     scene.add(sphere);
-
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 1, 2);
-    scene.add(light);
-
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
-    scene.add(ambientLight);
-
-    camera.position.z = 5;
 
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate);
@@ -56,15 +38,7 @@ const FloatingSphere = ({ position = [0, 0, 0], color = '#9b87f5', size = 1 }: F
     animate();
 
     return () => {
-      if (animationIdRef.current) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-      geometry.dispose();
-      material.dispose();
-      renderer.dispose();
-      if (mountRef.current && mountRef.current.contains(renderer.domElement)) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
+      cleanupThreeResources(mountRef.current, renderer, geometry, material, animationIdRef.current);
     };
   }, [color, position, size]);
 
