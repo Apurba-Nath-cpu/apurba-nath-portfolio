@@ -11,15 +11,15 @@ interface ThreeSetupConfig {
 
 export const createThreeSetup = (mount: HTMLDivElement, config: ThreeSetupConfig = {}) => {
   const {
-    size = { width: 150, height: 150 },
+    size = { width: window.innerWidth, height: window.innerHeight },
     antialias = false,
     alpha = true,
     precision = "lowp",
-    position = { zIndex: "-10" }
+    position = { zIndex: "-1" }
   } = config;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(75, size.width / size.height, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ antialias, alpha, precision });
 
   renderer.setSize(size.width, size.height);
@@ -27,6 +27,10 @@ export const createThreeSetup = (mount: HTMLDivElement, config: ThreeSetupConfig
   
   // Apply positioning styles
   renderer.domElement.style.position = 'absolute';
+  renderer.domElement.style.top = '0';
+  renderer.domElement.style.left = '0';
+  renderer.domElement.style.width = '100%';
+  renderer.domElement.style.height = '100%';
   if (position.top) renderer.domElement.style.top = position.top;
   if (position.left) renderer.domElement.style.left = position.left;
   if (position.right) renderer.domElement.style.right = position.right;

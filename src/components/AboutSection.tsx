@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import FloatingSphere from './three/FloatingSphere';
@@ -29,12 +28,12 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-20 bg-secondary/50 dark:bg-gray-900 relative overflow-hidden" ref={sectionRef}>
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0">
         <FloatingSphere position={[-5, 2, 0]} color="#6E59A5" size={1.2} />
         <FloatingSphere position={[5, -2, 0]} color="#D6BCFA" size={0.8} />
       </div>
       
-      <div className="section-container reveal fade-bottom">
+      <div className="section-container reveal fade-bottom relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">About Me</h2>
           <div className="w-20 h-1 bg-accent mx-auto"></div>

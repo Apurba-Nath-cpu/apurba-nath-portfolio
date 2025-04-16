@@ -16,10 +16,7 @@ const FloatingSphere = ({ position = [0, 0, 0], color = '#9b87f5', size = 1 }: F
   useEffect(() => {
     if (!mountRef.current) return;
 
-    const { scene, camera, renderer } = createThreeSetup(mountRef.current, {
-      size: { width: 200, height: 200 },
-      position: { zIndex: "-1" }
-    });
+    const { scene, camera, renderer } = createThreeSetup(mountRef.current);
     
     const geometry = new THREE.IcosahedronGeometry(size, 0);
     const material = new THREE.MeshPhongMaterial({
@@ -41,34 +38,12 @@ const FloatingSphere = ({ position = [0, 0, 0], color = '#9b87f5', size = 1 }: F
 
     animate();
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const domElement = renderer.domElement;
-        if (entry.isIntersecting) {
-          domElement.style.visibility = 'visible';
-          if (!animationIdRef.current) {
-            animate();
-          }
-        } else {
-          domElement.style.visibility = 'hidden';
-          if (animationIdRef.current) {
-            cancelAnimationFrame(animationIdRef.current);
-            animationIdRef.current = null;
-          }
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(mountRef.current);
-
     return () => {
-      observer.disconnect();
       cleanupThreeResources(mountRef.current, renderer, geometry, material, animationIdRef.current);
     };
   }, [color, position, size]);
 
-  return <div ref={mountRef} className="absolute w-full h-full opacity-40" />;
+  return <div ref={mountRef} className="absolute inset-0 opacity-40" />;
 };
 
 export default FloatingSphere;
