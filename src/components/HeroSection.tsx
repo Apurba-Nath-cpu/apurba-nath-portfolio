@@ -23,7 +23,7 @@ const HeroSection = () => {
             
             <p className="text-lg text-muted-foreground max-w-2xl">
               I'm a software engineer specializing in building exceptional digital experiences.
-              Currently, I'm focused on building accessible, 3D home designing product at <span className="font-medium text-foreground">Superbolt Technologies</span>.
+              Currently, I'm focused on building an accessible, 3D home designing product at <span className="font-medium text-foreground">Superbolt Technologies</span>.
             </p>
             
             <div className="flex flex-wrap gap-4">
