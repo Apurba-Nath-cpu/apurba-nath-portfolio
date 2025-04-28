@@ -27,7 +27,7 @@ const ThreeBackground = () => {
 
     // Create a low-poly particle system for stars
     const starsGeometry = new THREE.BufferGeometry();
-    const starsCount = 500;
+    const starsCount = 1000;
     const positions = new Float32Array(starsCount * 3);
     const sizes = new Float32Array(starsCount);
     
@@ -43,7 +43,7 @@ const ThreeBackground = () => {
 
     const starsMaterial = new THREE.PointsMaterial({
       size: 0.1,
-      color: 0xffffff,
+      color: 0x6366f1,
       transparent: true,
       opacity: 0.8,
       sizeAttenuation: true
@@ -138,7 +138,7 @@ const ThreeBackground = () => {
 
     // Animation loop with frame limiting
     let lastTime = 0;
-    const targetFPS = 30;
+    const targetFPS = 60;
     const frameInterval = 1000 / targetFPS;
 
     const animate = (timestamp: number) => {
@@ -150,8 +150,8 @@ const ThreeBackground = () => {
         lastTime = timestamp - (delta % frameInterval);
         
         // Animate stars
-        stars.rotation.x += 0.0002;
-        stars.rotation.y += 0.0002;
+        stars.rotation.x += 0.0005;
+        stars.rotation.y += 0.0005;
 
         // Animate shapes
         shapes.forEach((shape, i) => {
@@ -163,8 +163,8 @@ const ThreeBackground = () => {
         });
 
         // Camera movement based on mouse position
-        camera.position.x += (mouse.x * 2 - camera.position.x) * 0.05;
-        camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.05;
+        camera.position.x += (mouse.x * 2 - camera.position.x) * 0.1;
+        camera.position.y += (-mouse.y * 2 - camera.position.y) * 0.1;
         camera.lookAt(scene.position);
 
         renderer.render(scene, camera);
