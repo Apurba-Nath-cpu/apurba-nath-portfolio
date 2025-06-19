@@ -9,7 +9,7 @@ const skillCategories = [
   {
     title: "Frontend Development",
     icon: <Layout className="h-6 w-6" />,
-    skills: ["React", "CSS", "Tailwind CSS", "Jetpack Compose", "Flutter"]
+    skills: ["React", "CSS", "Tailwind CSS", "Flutter"]
   },
   {
     title: "Backend Development",
@@ -22,19 +22,19 @@ const skillCategories = [
     skills: ["JavaScript", "TypeScript", "Dart", "Python", "Java"]
   },
   {
+    title: "Databases",
+    icon: <Wrench className="h-6 w-6" />,
+    skills: ["Firestore", "Supabase", "MongoDB", "MySQL"]
+  },
+  {
     title: "Developer Tools",
     icon: <Wrench className="h-6 w-6" />,
     skills: ["Android Studio", "Git", "GitHub", "Flutter DevTools", "Vercel", "Jupyter Notebook", "Figma"]
   },
   {
-    title: "APIs & Libraries",
-    icon: <Layers className="h-6 w-6" />,
-    skills: ["React Redux", "Provider", "Riverpod", "NumPy", "Pandas"]
-  },
-  {
-    title: "Design & UI/UX",
+    title: "Cloud",
     icon: <Palette className="h-6 w-6" />,
-    skills: ["Responsive Design", "UI/UX Principles", "Figma", "Material Design"]
+    skills: ["AWS IAM", "AWS EC2", "AWS DynamoDB", "AWS RDS", "AWS S3"]
   }
 ];
 

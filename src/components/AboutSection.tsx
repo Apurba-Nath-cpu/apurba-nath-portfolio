@@ -63,8 +63,9 @@ const AboutSection = () => {
               <div>
                 <h4 className="font-medium">Achievements</h4>
                 <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1 mt-2">
-                  <li>Solved 350+ Data Structures and Algorithms problems on various platforms</li>
-                  <li>LeetCode, GFG, Coding Ninja</li>
+                  <li>Boosted SuperBolter website's performance by 43% by CDN implementation and code optimization</li>
+                  <li>Skyrocketed SuperBolter Android app's rating from 3.0 to 4.3 on Google Play store</li>
+                  <li>Solved over 350+ Data Structures and Algorithms problems on various platforms: LeetCode, GFG, Coding Ninjas</li>
                   <li>Published navigatex on pub.dev with 150/160 pub points</li>
                 </ul>
               </div>

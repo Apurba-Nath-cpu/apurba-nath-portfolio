@@ -18,10 +18,10 @@ const experiences = [
     skills: ["React", "Flutter", "Firebase", "Figma", "Unity"],
     achievements: [
       "Elevated App Rating from 3.0 to 4.3, Revamped user experience and resolved key pain points, skyrocketing app ratings from 3.0 to 4.3 on Google Play Store, ahead of year's median.",
+      "Mission Shark Tank: Spearheaded pivotal product enhancements and strategic feature rollouts that directly contributed to our company's selection and national exposure on Shark Tank Season 4.",
       "Boosted website's performance by 45%, Leveraged CDN implementation and optimized code modularity through OOP, resulting in a 45% decrease in render.",
       "Developed intuitive onboarding experience, Optimized performance and enhanced first-time user experience, contributing to a 50% growth in daily web active users.",
       "Streamlined deployment workflow, Strategically planned 40+ major code revisions and continuously monitored app's performance, seamlessly prompting app updates.",
-      "Enhanced user journey, Redesigned and deployed a new onboarding flow that simplified user interactions, resulting in a notable 21% decrease in app crashes.",
       "Enabled user feedback, Integrated user feedback forms at app's important pain points to gather valuable insights and systematically improve the user experience leading to 43% increased feedback, complemented by new Analytics to track user's behavior."
     ]
   },

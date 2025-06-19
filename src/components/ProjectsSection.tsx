@@ -15,14 +15,14 @@ const projects = [
   },
   {
     title: "navigatiox",
-    description: "A Dart package that provides a collection of custom page transition animations to enhance the navigation experience in your Flutter applications with 7+ animations with intense customization.",
+    description: "A Flutter package that provides a collection of custom page transition animations to enhance the navigation experience in your Flutter applications with 7+ animations with intense customization.",
     tags: ["Flutter", "Dart", "Animation"],
     github: "https://github.com/apurba-nath-cpu/navigatiox",
     demo: "https://pub.dev"
   },
   {
     title: "Readme",
-    description: "An application to share poems, stories, articles, essays, etc. under 5 different categories, a social media app for literature with Firebase for authentication, storage, connect, post in the platform.",
+    description: "A Flutter application to share poems, stories, articles, essays, etc. under 5 different categories, a social media app for literature with Firebase for authentication, storage, connect, post in the platform.",
     tags: ["Dart", "Flutter", "Firebase"],
     github: "https://github.com/apurba-nath-cpu/Readme",
     demo: null
