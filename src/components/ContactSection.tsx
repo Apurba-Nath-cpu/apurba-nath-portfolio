@@ -100,8 +100,8 @@ const ContactSection = () => {
                 <Phone className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-lg font-medium mb-2">Phone</h3>
-              <a href={`tel:+91${phone}`} className="text-accent hover:underline">
-                +91 {phone}
+              <a href={`tel:+91 8690585483${phone}`} className="text-accent hover:underline">
+                +91 8690585483{phone}
               </a>
             </CardContent>
           </Card>
